@@ -13,7 +13,11 @@ cp -avf "/ctx/system_files"/. /
 # https://mirrors.rpmfusion.org/mirrorlist?path=free/fedora/updates/43/x86_64/repoview/index.html&protocol=https&redirect=1
 
 # this installs a package from fedora repos
-dnf5 install -y tmux
+# PACKAGES=(
+#     libcamera
+# )
+
+# dnf5 install -y "${PACKAGES[@]}"
 
 # Use a COPR Example:
 #
@@ -23,5 +27,24 @@ dnf5 install -y tmux
 # dnf5 -y copr disable ublue-os/staging
 
 #### Example for enabling a System Unit File
+case "${IMAGE_VARIANT}" in
+    # main)
+    #     echo "Building main variant"
+    #     # for now we don't need something special for the main variant
+    #     ;;
+    # nvidia)
+    #     echo "Building NVIDIA variant"
+    #     # for now we don't need something special for the nvidia variant
+    #     ;;
+    surface)
+        echo "Building Surface variant"
+        /ctx/surface-kernel.sh
+        /ctx/finalize-surface.sh
+        ;;
+    *)
+        echo "Only 'surface' variant is supported right now"
+        exit 1
+        ;;
+esac
 
-systemctl enable podman.socket
+# systemctl enable podman.socket || true

@@ -1,11 +1,18 @@
+ARG BASE_IMAGE=ghcr.io/ublue-os/bazzite-dx-gnome:stable-44.20260629
+ARG IMAGE_VARIANT=surface
+
 # Allow build scripts to be referenced without being copied into the final image
 FROM scratch AS ctx
 COPY build_files /
 COPY system_files /system_files
 
+FROM ghcr.io/davidbitterlich/linux-surface-fedora:latest-fc44 AS kernel
+
 # Base Image
-FROM ghcr.io/ublue-os/bazzite:stable@sha256:b923f92d5a5b59eb992e269383eba2744601052da9d3d1595f76e79aa6ce2df0
-## Other possible base images include:
+# FROM ghcr.io/ublue-os/bazzite:stable@sha256:b923f92d5a5b59eb992e269383eba2744601052da9d3d1595f76e79aa6ce2df0
+FROM ${BASE_IMAGE}
+COPY --from=kernel /packages /tmp/packages
+
 # FROM ghcr.io/ublue-os/bazzite:testing
 # FROM ghcr.io/ublue-os/aurora:stable
 # FROM ghcr.io/ublue-os/bluefin-nvidia-open:stable
@@ -30,10 +37,13 @@ FROM ghcr.io/ublue-os/bazzite:stable@sha256:b923f92d5a5b59eb992e269383eba2744601
 ## make modifications desired in your image and install packages by modifying the build.sh script
 ## the following RUN directive does all the things required to run "build.sh" as recommended.
 
+ARG IMAGE_VARIANT
+ENV IMAGE_VARIANT=${IMAGE_VARIANT}
+
 RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=cache,dst=/var/cache \
     --mount=type=cache,dst=/var/log \
-    --mount=type=tmpfs,dst=/tmp \
+    --mount=type=tmpfs,dst=/tmp/cache \
     /ctx/build.sh
 
 ### LINTING

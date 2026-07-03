@@ -1,3 +1,10 @@
+# bazzite-custom
+
+For now this is just a custom bazzite-dx-gnome with a recent linux-surface-kernel for Microsoft Surface hardware.
+
+[Adopted from this setup](https://github.com/davidbitterlich/bazzite-custom)
+[Using this custom kernel fork](https://github.com/davidbitterlich/linux-surface)
+
 # image-template
 
 This repository is meant to be a template for building your own custom [bootc](https://github.com/bootc-dev/bootc) image. This template is the recommended way to make customizations to any image published by the Universal Blue Project.
