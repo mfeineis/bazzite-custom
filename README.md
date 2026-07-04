@@ -2,8 +2,8 @@
 
 For now this is just a custom bazzite-dx-gnome with a recent linux-surface-kernel for Microsoft Surface hardware.
 
-[Adopted from this setup](https://github.com/davidbitterlich/bazzite-custom)
-[Using this custom kernel fork](https://github.com/davidbitterlich/linux-surface)
+- [Adopted from this setup](https://github.com/davidbitterlich/bazzite-custom)
+- [Using this custom kernel fork](https://github.com/davidbitterlich/linux-surface)
 
 # image-template
 
