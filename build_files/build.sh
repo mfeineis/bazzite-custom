@@ -40,6 +40,7 @@ case "${IMAGE_VARIANT}" in
         echo "Building Surface variant"
         /ctx/surface-kernel.sh
         /ctx/finalize-surface.sh
+        /ctx/image-cleanup.sh "${IMAGE_VARIANT}"
         ;;
     *)
         echo "Only 'surface' variant is supported right now"
